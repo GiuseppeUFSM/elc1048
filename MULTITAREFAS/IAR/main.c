@@ -64,7 +64,6 @@ void tarefa_1(void)
 	{
 		a++;
                 TarefaContinua(2);
-	
 	}
 }
 
