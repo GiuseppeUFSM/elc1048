@@ -31,7 +31,6 @@ uint32_t PILHA_TAREFA_OCIOSA[TAM_PILHA_OCIOSA];
  */
 int main(void)
 {
-	
 	/* Criacao das tarefas */
 	/* Parametros: ponteiro, nome, ponteiro da pilha, tamanho da pilha, prioridade da tarefa */
 	
@@ -64,7 +63,7 @@ void tarefa_1(void)
 	for(;;)
 	{
 		a++;
-		TarefaContinua(3);
+                TarefaContinua(2);
 	
 	}
 }
@@ -75,7 +74,7 @@ void tarefa_2(void)
 	for(;;)
 	{
 		b++;
-		TarefaSuspende(2);	
+                TarefaSuspende(2);
 	}
 }
 
@@ -85,6 +84,6 @@ void tarefa_3(void)
 	for(;;)
 	{
 		c++;
-		TarefaContinua(2);	
+		TarefaEspera(100);	
 	}
 }
