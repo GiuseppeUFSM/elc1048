@@ -26,11 +26,18 @@ uint32_t PILHA_TAREFA_2[TAM_PILHA_2];
 uint32_t PILHA_TAREFA_3[TAM_PILHA_3];
 uint32_t PILHA_TAREFA_OCIOSA[TAM_PILHA_OCIOSA];
 
+/* Declaração das variáveis Globais */
+volatile uint16_t buff = 0;
+
+/* Declaração de Semáforos */
+semaforo_t SemaforoAvisaCheio = {0,0};
+semaforo_t SemaforoAvisaVazio = {1,0};
 /*
  * Funcao principal de entrada do sistema
  */
 int main(void)
-{
+{        
+         
 	/* Criacao das tarefas */
 	/* Parametros: ponteiro, nome, ponteiro da pilha, tamanho da pilha, prioridade da tarefa */
 	
@@ -63,26 +70,31 @@ void tarefa_1(void)
 	for(;;)
 	{
 		a++;
-                TarefaContinua(2);
 	}
 }
 
 void tarefa_2(void)
-{
+{       //produtora
 	volatile uint16_t b = 0;
 	for(;;)
 	{
-		b++;
-                TarefaSuspende(2);
+                SemaforoAguarda(&SemaforoAvisaVazio);
+                b++;
+                buff = b;
+                SemaforoLibera(&SemaforoAvisaCheio);
 	}
 }
 
 void tarefa_3(void)
-{
+{       // Consumidora
 	volatile uint16_t c = 0;
+        uint16_t d = 0;
 	for(;;)
 	{
+                SemaforoAguarda(&SemaforoAvisaCheio);
 		c++;
-		TarefaEspera(100);	
+                d = buff + c;
+                SemaforoLibera(&SemaforoAvisaVazio);
+		TarefaEspera(1);	
 	}
 }

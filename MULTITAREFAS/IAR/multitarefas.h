@@ -58,7 +58,7 @@ extern  prioridade_t Prioridades[PRIORIDADE_MAXIMA+1];
 typedef struct 
 {
 	uint8_t     contador;            ///< Contador do semaforo
-	uint8_t 	tarefaEsperando;        ///< Tarefa esperando
+	uint8_t     tarefaEsperando;        ///< Tarefa esperando
 } semaforo_t;
 
 
